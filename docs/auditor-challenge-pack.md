@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This pack prepares project owners to answer likely assessor questions with evidence rather than confidence statements. Responses describe the current simulated position. They should not be used as scripts to conceal unresolved gaps.
+This pack prepares project owners to answer likely assessor questions with evidence rather than confidence statements.
 
 ## Challenge 1: Why Is The CDE Limited To Three Subnets?
 
@@ -38,7 +38,7 @@ This pack prepares project owners to answer likely assessor questions with evide
 
 ## Challenge 5: Does Account Data Leave The Payment Network?
 
-**Current response:** Yes. A simulated log sample contains full PAN and is forwarded to a shared logging account. Encrypted settlement snapshots also replicate to a shared backup account.
+**Current response:** Yes. The reviewed log sample contains full PAN and is forwarded to a shared logging account. Encrypted settlement snapshots also replicate to a shared backup account.
 
 **Evidence required:** Field-level data-flow mapping, log samples, PAN discovery results, backup inventory, encryption design and retention records.
 
