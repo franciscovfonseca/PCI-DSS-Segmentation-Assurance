@@ -2,9 +2,9 @@
 
 ## Decision
 
-Orchid Retail Group cannot currently rely on network segmentation to limit PCI DSS scope to the three declared payment subnets. Shared services store account data, connect to payment systems or can affect the security of the CDE. They remain inside the assessment boundary until the identified dependencies are removed or controlled and the revised boundary is independently tested.
+Network segmentation cannot currently be relied upon to limit PCI DSS scope to the three declared payment subnets. Shared services store account data, connect to payment systems or can affect the security of the CDE. They remain inside the assessment boundary until the identified dependencies are removed or controlled and the revised boundary is independently tested.
 
-This determination is based on simulated evidence. It supports an assurance decision but does not establish PCI DSS compliance.
+This determination supports an assurance decision but does not establish PCI DSS compliance.
 
 ## Systems That Store, Process Or Transmit Account Data
 
@@ -60,4 +60,4 @@ The organization may request reassessment when all of the following conditions a
 
 ## Residual Risk
 
-Even after technical isolation, scope can expand through future changes to deployment roles, logging fields, backup policies or routes. Orchid should treat scoping as a maintained control rather than a one-time diagram exercise. Change management must trigger scope review when systems, data flows or trust relationships change.
+Even after technical isolation, scope can expand through future changes to deployment roles, logging fields, backup policies or routes. Scoping should be treated as a maintained control rather than a one-time diagram exercise. Change management must trigger scope review when systems, data flows or trust relationships change.
