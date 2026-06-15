@@ -7,7 +7,7 @@
 
 ## Decision Requested
 
-Approve rejection of the current proposal to limit PCI DSS scope to Orchid Retail Group's three payment subnets. Authorize the 90-day remediation and evidence plan before the scope-reduction request is reconsidered.
+Approve rejection of the current proposal to limit PCI DSS scope to three payment subnets. Authorize the 90-day remediation and evidence plan before the scope-reduction request is reconsidered.
 
 ## Why This Decision Is Necessary
 
