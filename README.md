@@ -1,6 +1,10 @@
+<div align="center">
+
 # PCI DSS Network Segmentation Assurance Review
 
-![PCI DSS Network Segmentation banner](docs/banner.svg)
+![PCI DSS Network Segmentation banner](docs/banner.svg.png)
+
+</div>
 
 This project assesses whether network segmentation is strong enough to reduce PCI DSS scope. It covers cardholder data flows, connected systems, security-impacting services, control gaps, evidence requirements and remediation priorities.
 
