@@ -6,7 +6,7 @@ Determine whether technical and administrative controls isolate the proposed CDE
 
 ## Rating Method
 
-Ratings reflect the simulated likelihood that a weakness could undermine the segmentation claim and the impact on account data or payment-system integrity.
+Ratings reflect the likelihood that a weakness could undermine the segmentation claim and the impact on account data or payment-system integrity.
 
 | Rating | Meaning |
 |---|---|
