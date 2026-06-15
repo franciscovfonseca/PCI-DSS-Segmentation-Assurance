@@ -1,14 +1,14 @@
-# Scenario And Assumptions
+# Assessment Context
 
 ## Purpose
 
-This document defines the simulated facts used in the assessment. It prevents an invented scenario from being presented as observed evidence and makes each judgment traceable to a stated condition.
+This document defines the environment, evidence set and assumptions used in the segmentation assessment. It makes each scope decision and finding traceable to a stated condition.
 
-## Organization
+## Environment
 
-Orchid Retail Group is a fictional retailer with an e-commerce platform and 42 physical stores across the United Kingdom and Ireland. It processes approximately 4.8 million card transactions per year. The company is preparing for its next PCI DSS assessment and wants to reduce the number of systems presented to its assessor.
+The project covers an omnichannel payment environment processing approximately 4.8 million card transactions per year. The e-commerce payment service runs in AWS while identity, administrative access and several operational services are shared across the wider enterprise.
 
-The Chief Information Security Officer sponsors the review. The Head of Infrastructure owns cloud networking. The Director of Digital Commerce owns the payment application. Internal Audit challenges the final scope determination. A Qualified Security Assessor would make the formal assessment decision.
+The CISO sponsors the review. Cloud Infrastructure owns networking, Digital Commerce owns the payment application and Internal Audit challenges the final scope determination. A Qualified Security Assessor would make the formal assessment decision.
 
 ## Existing Scope Claim
 
@@ -16,9 +16,9 @@ Management claims that only three AWS payment subnets form the cardholder data e
 
 The claim excludes corporate identity, shared deployment tooling, central logging, shared backup services and administrator endpoints. The purpose of this project is to test whether those exclusions are defensible.
 
-## Simulated Evidence Available
+## Evidence Available
 
-| Evidence ID | Simulated item | Assessment use |
+| Evidence ID | Item | Assessment use |
 |---|---|---|
 | EV-01 | Current AWS account and VPC diagram | Identifies declared payment boundaries |
 | EV-02 | Transit gateway route export | Identifies reachable private networks |
@@ -43,8 +43,8 @@ The claim excludes corporate identity, shared deployment tooling, central loggin
 
 ## Evidence Boundaries
 
-No live AWS exports, packet captures, identity records or payment data were used. Evidence IDs represent the records that should exist in a real review. Finding ratings reflect the simulated conditions and should not be reused without validating likelihood, exposure and business impact in the target environment.
+Evidence IDs define the records required to support the assessment. Finding ratings should be reviewed against current likelihood, exposure and business impact before use in another environment.
 
 ## Decision Constraint
 
-The assessment may recommend inclusion in PCI DSS scope when a system stores, processes or transmits account data, connects to the CDE or can affect CDE security. It may not declare Orchid Retail Group compliant. Final validation of PCI DSS scope and compliance remains the responsibility of the assessed entity and its assessor.
+The assessment may recommend inclusion in PCI DSS scope when a system stores, processes or transmits account data, connects to the CDE or can affect CDE security. Final validation of PCI DSS scope and compliance remains the responsibility of the assessed entity and its assessor.
