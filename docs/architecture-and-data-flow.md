@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This artifact traces account data and administrative influence across the claimed segmentation boundary. The diagrams represent the simulated current state, not a production network.
+This artifact traces account data and administrative influence across the claimed segmentation boundary.
 
 ## Account Data Flow
 
