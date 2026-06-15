@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">PCI DSS Segmentation Assurance</title>
+  <desc id="desc">Enterprise banner showing shared services crossing a claimed cardholder data environment boundary.</desc>
+  <rect width="1280" height="640" fill="#0b1f33"/>
+  <rect x="70" y="245" width="280" height="210" rx="18" fill="#16324f" stroke="#4bb3a7" stroke-width="4"/>
+  <rect x="500" y="210" width="310" height="280" rx="18" fill="#102a43" stroke="#f2b84b" stroke-width="5" stroke-dasharray="14 10"/>
+  <rect x="930" y="245" width="280" height="210" rx="18" fill="#16324f" stroke="#4bb3a7" stroke-width="4"/>
+  <text x="640" y="92" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">PCI DSS Segmentation Assurance</text>
+  <text x="640" y="138" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="25">Scope, evidence and defensible decisions</text>
+  <text x="210" y="292" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="25" font-weight="700">SHARED SERVICES</text>
+  <text x="655" y="258" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="25" font-weight="700">CLAIMED CDE</text>
+  <text x="1070" y="292" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="25" font-weight="700">EVIDENCE</text>
+  <text x="210" y="346" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="21">Identity</text>
+  <text x="210" y="382" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="21">CI/CD</text>
+  <text x="210" y="418" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="21">Logging and backup</text>
+  <text x="655" y="330" text-anchor="middle" fill="#d8e5ef" font-family="Arial, sans-serif" font-size="22">Payment API</text>
+  <text x="655" y="371" text-anchor="middle" fill="#d8e5ef" font-family="Arial, sans-serif" font-size="22">Key service</text>
+  <text x="655" y="412" text-anchor="middle" fill="#d8e5ef" font-family="Arial, sans-serif" font-size="22">Settlement vault</text>
+  <text x="1070" y="346" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="21">Routes</text>
+  <text x="1070" y="382" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="21">Access paths</text>
+  <text x="1070" y="418" text-anchor="middle" fill="#b8c7d9" font-family="Arial, sans-serif" font-size="21">Test results</text>
+  <path d="M350 330 C420 330 430 315 500 315" fill="none" stroke="#f26b5b" stroke-width="8"/>
+  <path d="M350 382 C420 382 430 372 500 372" fill="none" stroke="#f26b5b" stroke-width="8"/>
+  <path d="M810 350 C860 350 880 350 930 350" fill="none" stroke="#4bb3a7" stroke-width="8"/>
+  <polygon points="494,315 478,305 478,325" fill="#f26b5b"/>
+  <polygon points="494,372 478,362 478,382" fill="#f26b5b"/>
+  <polygon points="924,350 908,340 908,360" fill="#4bb3a7"/>
+  <text x="640" y="562" text-anchor="middle" fill="#f2b84b" font-family="Arial, sans-serif" font-size="28" font-weight="700">A subnet boundary is not an assurance conclusion</text>
+</svg>
