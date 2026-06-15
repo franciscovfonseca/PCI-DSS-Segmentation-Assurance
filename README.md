@@ -1,24 +1,22 @@
 # PCI DSS Network Segmentation Assurance Review
 
-![PCI DSS Network Segmentation Assurance Review banner](docs/banner.svg)
+![PCI DSS Network Segmentation banner](docs/banner.svg)
 
-I assessed whether a fictional retailer's network segmentation claim was strong enough to reduce PCI DSS scope. The review concludes that the claim is not currently supportable because shared identity, deployment, logging and backup services can affect or receive data from the cardholder data environment.
+This project assesses whether network segmentation is strong enough to reduce PCI DSS scope. It covers cardholder data flows, connected systems, security-impacting services, control gaps, evidence requirements and remediation priorities.
 
 ## Executive Summary
 
-Orchid Retail Group believed that its payment subnets were the only systems in PCI DSS scope. I tested that position as an assurance claim rather than accepting the network diagram at face value.
+The initial scope position limited the cardholder data environment to three payment subnets. The review tests that position against network paths, identity dependencies, deployment access, logging flows and backup administration.
 
 The assessment identified six control gaps. Four shared services materially expand the current assessment boundary: the corporate identity platform, a shared CI/CD runner, the central logging platform and a shared backup vault. Broad internal routing and missing post-change segmentation testing weaken the remaining boundary.
 
-My decision is to reject the proposed scope reduction until the high-priority actions are implemented and independently tested. This is not a compliance determination. It is a simulated scoping and control-effectiveness assessment mapped to selected PCI DSS v4.0.1 expectations.
+The proposed scope reduction is not supported until the high-priority actions are implemented and independently tested. This is a scoping and control-effectiveness assessment mapped to selected PCI DSS v4.0.1 expectations, not a declaration of compliance.
 
-## Scenario
+## Project Context
 
-Orchid Retail Group is a fictional omnichannel retailer processing approximately 4.8 million card transactions each year. Its e-commerce payment service runs in AWS while identity, administrative access and several operational services remain shared with the wider corporate environment.
+The environment uses an AWS-hosted payment service with identity, administrative access and operational services shared across the wider enterprise. The review examines whether three payment subnets can be treated as an isolated cardholder data environment.
 
-The Chief Information Security Officer wants to reduce assessment cost by limiting PCI DSS scope to three payment subnets. The Head of Infrastructure believes the existing cloud firewall rules provide sufficient segmentation. Internal Audit has asked for evidence that the boundary would survive assessor challenge.
-
-All organizations, systems, evidence samples and findings in this repository are simulated. The detailed assumptions are recorded in the [scenario and assumptions](docs/scenario-and-assumptions.md).
+The detailed architecture, evidence set and assessment boundaries are recorded in the [assessment context](docs/scenario-and-assumptions.md).
 
 ## Assessment Decision
 
@@ -44,7 +42,7 @@ flowchart LR
 
 | Artifact | Decision purpose |
 |---|---|
-| [Scenario and assumptions](docs/scenario-and-assumptions.md) | Separates supplied facts, simulated evidence and assessment assumptions |
+| [Assessment context](docs/scenario-and-assumptions.md) | Defines the architecture, evidence set and assessment assumptions |
 | [Architecture and data flow](docs/architecture-and-data-flow.md) | Shows cardholder data movement and cross-boundary dependencies |
 | [Scope determination](docs/scope-determination.md) | Defines current in-scope, connected and security-impacting systems |
 | [Segmentation control assessment](docs/segmentation-control-assessment.md) | Tests the claimed boundary and records six findings |
@@ -52,7 +50,7 @@ flowchart LR
 | [Risk register and remediation roadmap](docs/risk-register-and-remediation.md) | Prioritizes treatment by risk reduction and dependency |
 | [Auditor challenge pack](docs/auditor-challenge-pack.md) | Anticipates questions and prevents unsupported assurances |
 | [Executive decision memo](docs/executive-decision-memo.md) | Converts technical findings into an accountable business decision |
-| [Source register](docs/source-register.md) | Records the standards and inspiration reviewed for this project |
+| [Source register](docs/source-register.md) | Records the PCI SSC standards and guidance used |
 
 ## Method
 
@@ -106,7 +104,7 @@ flowchart LR
 
 ## How To Navigate
 
-Recruiters and hiring managers can start with this README and the [executive decision memo](docs/executive-decision-memo.md). GRC practitioners can follow the assessment trail from the [scope determination](docs/scope-determination.md) to the [control assessment](docs/segmentation-control-assessment.md), then review the [evidence plan](docs/evidence-and-test-plan.md) and [auditor challenge pack](docs/auditor-challenge-pack.md).
+Start with the [scope determination](docs/scope-determination.md) and [control assessment](docs/segmentation-control-assessment.md). The [evidence plan](docs/evidence-and-test-plan.md), [remediation roadmap](docs/risk-register-and-remediation.md) and [auditor challenge pack](docs/auditor-challenge-pack.md) provide the supporting detail.
 
 ## Skills Demonstrated
 
@@ -117,9 +115,9 @@ Recruiters and hiring managers can start with this README and the [executive dec
 - Risk rating, remediation sequencing and residual-risk communication
 - Executive reporting and audit challenge preparation
 
-## Limitations
+## Scope Note
 
-This portfolio project does not contain packet captures, firewall exports, cloud configuration exports or penetration-test results from a real environment. Findings are based on a defined simulated evidence pack. The assessment shows how I would structure and defend the work, not that any organization is PCI DSS compliant.
+The project provides an assessment method and documentation set. It does not establish PCI DSS compliance. A compliance conclusion requires validation of the implemented environment, current evidence and applicable assessment procedures.
 
 ## References
 
