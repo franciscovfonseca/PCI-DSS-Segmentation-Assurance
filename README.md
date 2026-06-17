@@ -1,6 +1,6 @@
 # PCI DSS Network Segmentation Assurance Review
 
-![PCI DSS Network Segmentation banner](docs/banner.svg)
+![PCI DSS Network Segmentation banner](docs/banner.svg.png)
 
 This project looks at a simple but important question:
 
