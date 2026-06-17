@@ -1,90 +1,121 @@
-<div align="center">
-
 # PCI DSS Network Segmentation Assurance Review
 
-![PCI DSS Network Segmentation banner](docs/banner.svg.png)
+![PCI DSS Network Segmentation banner](docs/banner.svg)
 
-</div>
+This project looks at a simple but important question:
 
-This project assesses whether network segmentation is strong enough to reduce PCI DSS scope. It covers cardholder data flows, connected systems, security-impacting services, control gaps, evidence requirements and remediation priorities.
+**Can a company really reduce its PCI DSS scope just because the payment systems sit in separate network segments?**
 
-## Executive Summary
+My answer in this project is **not yet**.
 
-The initial scope position limited the cardholder data environment to three payment subnets. The review tests that position against network paths, identity dependencies, deployment access, logging flows and backup administration.
+The network is separated on paper, but several shared services still touch the payment environment. Identity, deployment, logging and backup systems can all affect the cardholder data environment. Because of that, the company cannot safely treat those shared services as out of scope until the gaps are fixed and tested.
 
-The assessment identified six control gaps. Four shared services materially expand the current assessment boundary: the corporate identity platform, a shared CI/CD runner, the central logging platform and a shared backup vault. Broad internal routing and missing post-change segmentation testing weaken the remaining boundary.
+## Why This Matters
 
-The proposed scope reduction is not supported until the high-priority actions are implemented and independently tested. This is a scoping and control-effectiveness assessment mapped to selected PCI DSS v4.0.1 expectations, not a declaration of compliance.
+PCI DSS scope is not only about where payment servers sit on a network diagram.
 
-## Project Context
+If another system can change, access or receive data from the payment environment, it may still matter for PCI DSS. That is where many segmentation reviews become tricky.
 
-The environment uses an AWS-hosted payment service with identity, administrative access and operational services shared across the wider enterprise. The review examines whether three payment subnets can be treated as an isolated cardholder data environment.
+This project shows how I would review a segmentation claim in a practical way:
 
-The detailed architecture, evidence set and assessment boundaries are recorded in the [assessment context](docs/scenario-and-assumptions.md).
+- Where does cardholder data move?
+- Which systems can connect to the payment environment?
+- Which shared services could affect payment security?
+- What evidence would an assessor expect to see?
+- What needs to be fixed before scope can be reduced?
 
-## Assessment Decision
+## The Scenario
 
-**Current decision:** Do not rely on segmentation to reduce PCI DSS scope.
+The environment has a payment application hosted in AWS. The payment systems are placed in dedicated subnets, but they still depend on shared enterprise services.
 
-The payment workloads are separated at subnet level, but the security boundary is undermined by shared control-plane dependencies and data flows. The organization should treat the identified connected and security-impacting systems as in scope until isolation is implemented, evidence is collected and segmentation effectiveness is tested.
+The goal is to decide whether the company can limit PCI DSS scope to the payment subnets only.
 
 ```mermaid
 flowchart LR
-    Customer[Customer browser] --> Edge[Cloud edge and WAF]
-    Edge --> Web[Commerce web tier]
+    Customer[Customer checkout] --> Web[Web tier]
     Web --> Pay[Payment API]
-    Pay --> HSM[Key service]
-    Pay --> Vault[Encrypted settlement vault]
-    Pay --> Logs[Central logging]
-    CICD[Shared CI/CD runner] --> Pay
-    IAM[Corporate identity control plane] --> Admin[Payment admin role]
-    Admin --> Pay
-    Vault --> Backup[Shared backup account]
+    Pay --> Vault[Settlement vault]
+
+    Identity[Shared identity] --> Pay
+    CICD[Shared CI/CD] --> Pay
+    Logs[Central logging] <-- Pay
+    Backup[Shared backup] <-- Vault
+
+    style Pay fill:#1267c4,color:#fff
+    style Vault fill:#1267c4,color:#fff
+    style Identity fill:#ffe8cc,color:#222
+    style CICD fill:#ffe8cc,color:#222
+    style Logs fill:#ffe8cc,color:#222
+    style Backup fill:#ffe8cc,color:#222
 ```
 
-## What I Delivered
+The blue systems are the clear payment systems. The orange systems are the issue. They are not payment systems, but they can still affect payment security or receive payment data.
 
-| Artifact | Decision purpose |
-|---|---|
-| [Assessment context](docs/scenario-and-assumptions.md) | Defines the architecture, evidence set and assessment assumptions |
-| [Architecture and data flow](docs/architecture-and-data-flow.md) | Shows cardholder data movement and cross-boundary dependencies |
-| [Scope determination](docs/scope-determination.md) | Defines current in-scope, connected and security-impacting systems |
-| [Segmentation control assessment](docs/segmentation-control-assessment.md) | Tests the claimed boundary and records six findings |
-| [Evidence and test plan](docs/evidence-and-test-plan.md) | Defines evidence needed to support each control conclusion |
-| [Risk register and remediation roadmap](docs/risk-register-and-remediation.md) | Prioritizes treatment by risk reduction and dependency |
-| [Auditor challenge pack](docs/auditor-challenge-pack.md) | Anticipates questions and prevents unsupported assurances |
-| [Executive decision memo](docs/executive-decision-memo.md) | Converts technical findings into an accountable business decision |
-| [Source register](docs/source-register.md) | Records the PCI SSC standards and guidance used |
+## Main Decision
 
-## Method
+The segmentation claim is too weak in its current state.
 
-1. Trace where account data is received, processed, transmitted and stored.
-2. Identify systems with connectivity to the CDE and systems that can affect its security.
-3. Test each claimed boundary against routes, identity paths, deployment paths and operational data flows.
-4. Distinguish evidence available from evidence still required.
-5. Record findings, residual risk and a decision on whether scope reduction is defensible.
-6. Define the conditions that must be met before reassessment.
+The company should not reduce PCI DSS scope to only the payment subnets until the shared services are cleaned up, locked down and tested.
 
 ## Key Findings
 
-| ID | Finding | Rating | Scope effect |
-|---|---|---:|---|
-| SEG-01 | Shared CI/CD runner can deploy to payment workloads | Critical | Shared DevOps account is security-impacting |
-| SEG-02 | Corporate identity administrators can influence payment roles | High | Identity control plane is security-impacting |
-| SEG-03 | Debug logging sends full PAN to the central logging platform | High | Logging platform stores account data |
-| SEG-04 | Shared backup operators can restore payment snapshots | High | Backup service and privileged operators are security-impacting |
-| SEG-05 | Payment egress permits broad private-network destinations | Medium | Connected-system population is not bounded |
-| SEG-06 | Segmentation was not retested after a transit routing change | Medium | Boundary effectiveness is unverified |
-
-## Framework Alignment
-
-| PCI DSS v4.0.1 area | Project response | Evidence |
+| Finding | Why it matters | Priority |
 |---|---|---|
-| Scope definition and confirmation | Identifies account-data flows, connected systems and security-impacting systems | [Scope determination](docs/scope-determination.md) |
-| Network and data-flow diagrams | Documents current architecture, trust paths and account-data movement | [Architecture and data flow](docs/architecture-and-data-flow.md) |
-| Network access restrictions | Assesses inbound, outbound and management paths crossing the claimed boundary | [Segmentation control assessment](docs/segmentation-control-assessment.md) |
-| Segmentation effectiveness testing | Defines annual, post-change and evidence-retention expectations | [Evidence and test plan](docs/evidence-and-test-plan.md) |
-| Risk and governance accountability | Assigns owners, due dates, acceptance conditions and decision authority | [Risk register](docs/risk-register-and-remediation.md) |
+| Shared CI/CD can deploy to payment systems | A compromised build process could change payment code | Critical |
+| Corporate identity can grant payment access | Admin access is controlled outside the payment boundary | High |
+| Payment logs include full card data | The logging platform becomes part of the scope | High |
+| Backups are managed through a shared service | Backup access can expose payment data | High |
+| Network egress is too broad | More internal systems may be reachable than expected | Medium |
+| Segmentation testing is out of date | The current boundary has not been proven after changes | Medium |
+
+## What I Built
+
+| Document | What it explains |
+|---|---|
+| [Assessment context](docs/scenario-and-assumptions.md) | The environment, scope claim and evidence used |
+| [Architecture and data flow](docs/architecture-and-data-flow.md) | How payment data and admin access move through the environment |
+| [Scope determination](docs/scope-determination.md) | What should be treated as in scope and why |
+| [Segmentation control assessment](docs/segmentation-control-assessment.md) | The detailed findings behind the decision |
+| [Evidence and test plan](docs/evidence-and-test-plan.md) | What proof is needed before the boundary can be trusted |
+| [Risk register and remediation roadmap](docs/risk-register-and-remediation.md) | What to fix first and who should own it |
+| [Auditor challenge pack](docs/auditor-challenge-pack.md) | Questions an assessor may ask and how to prepare |
+| [Executive decision memo](docs/executive-decision-memo.md) | A short summary for leadership |
+| [Source register](docs/source-register.md) | PCI SSC sources used for the project |
+
+## How I Approached It
+
+I did not start by accepting the diagram.
+
+I started by following the data and the trust paths:
+
+1. Identify where cardholder data is received, processed, stored and sent.
+2. Check which systems connect to the payment environment.
+3. Check which shared services can change or affect payment systems.
+4. Review logging, backup, identity and deployment paths.
+5. List the gaps that weaken the segmentation claim.
+6. Define what evidence is needed before the scope can be reduced.
+
+## What Needs To Change
+
+The biggest fixes are straightforward:
+
+- Move payment deployments to a dedicated CI/CD runner.
+- Separate payment admin access from normal corporate identity administration.
+- Remove card data from logs and check old log data.
+- Put payment backups under dedicated access controls.
+- Replace broad network routes with specific approved paths.
+- Run a fresh segmentation test after the changes are made.
+
+## Skills Shown
+
+| Skill | How this project shows it |
+|---|---|
+| PCI DSS scoping | Defines what should and should not be in scope |
+| Network segmentation review | Tests whether the boundary works in practice |
+| Data-flow analysis | Follows where cardholder data moves |
+| Access review | Looks at identity, admin and deployment paths |
+| Evidence planning | Lists what proof is needed for each conclusion |
+| Risk communication | Turns technical issues into clear business decisions |
 
 ## Repository Structure
 
@@ -106,26 +137,23 @@ flowchart LR
     `-- source-register.md
 ```
 
-## How To Navigate
+## How To Read This Project
 
-Start with the [scope determination](docs/scope-determination.md) and [control assessment](docs/segmentation-control-assessment.md). The [evidence plan](docs/evidence-and-test-plan.md), [remediation roadmap](docs/risk-register-and-remediation.md) and [auditor challenge pack](docs/auditor-challenge-pack.md) provide the supporting detail.
+Start with the [scope determination](docs/scope-determination.md) if you want the final decision.
 
-## Skills Demonstrated
+Read the [architecture and data flow](docs/architecture-and-data-flow.md) if you want to understand the environment.
 
-- PCI DSS scoping and network segmentation assurance
-- Cardholder data-flow analysis
-- Connected-to and security-impacting system identification
-- Evidence design and control-effectiveness testing
-- Risk rating, remediation sequencing and residual-risk communication
-- Executive reporting and audit challenge preparation
+Review the [segmentation control assessment](docs/segmentation-control-assessment.md) if you want the detailed findings.
+
+Use the [evidence and test plan](docs/evidence-and-test-plan.md) and [remediation roadmap](docs/risk-register-and-remediation.md) to see what should happen next.
 
 ## Scope Note
 
-The project provides an assessment method and documentation set. It does not establish PCI DSS compliance. A compliance conclusion requires validation of the implemented environment, current evidence and applicable assessment procedures.
+This project is an example of how to structure a PCI DSS segmentation review. It does not claim that any real company is PCI DSS compliant. A real compliance decision would require current evidence, testing and review by the organization and its assessor.
 
 ## References
 
-Primary and secondary materials are documented in the [source register](docs/source-register.md). PCI SSC materials were checked on 14 June 2026.
+Primary sources are listed in the [source register](docs/source-register.md). PCI SSC materials were checked on 14 June 2026.
 
 ## License
 
