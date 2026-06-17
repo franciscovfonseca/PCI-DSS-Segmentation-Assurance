@@ -30,16 +30,7 @@ The environment has a payment application hosted in AWS. The payment systems are
 
 The goal is to decide whether the company can limit PCI DSS scope to the payment subnets only.
 
-| Area | Role in the environment | Why it matters |
-|---|---|---|
-| Customer checkout | Starts the payment flow | Sends payment activity into the environment |
-| Web tier | Supports the customer-facing application | Connects users to the payment API |
-| Payment API | Handles payment processing | Clearly part of the cardholder data environment |
-| Settlement vault | Stores settlement-related payment data | Clearly part of the cardholder data environment |
-| Shared identity | Controls user and admin access | Can grant access to payment systems |
-| Shared CI/CD | Deploys code into the payment environment | Can change payment application behavior |
-| Central logging | Receives logs from payment systems | May receive cardholder data if logging is not controlled |
-| Shared backup | Stores backup copies | May expose payment data if access is too broad |
+![PCI DSS segmentation overview](docs/segmentation-overview.svg)
 
 The payment API and settlement vault are the clear payment systems. The shared services are the issue. They are not payment systems, but they can still affect payment security or receive payment data.
 
@@ -124,6 +115,7 @@ The biggest fixes are straightforward:
     |-- executive-decision-memo.md
     |-- risk-register-and-remediation.md
     |-- scenario-and-assumptions.md
+    |-- segmentation-overview.svg
     |-- scope-determination.md
     |-- segmentation-control-assessment.md
     `-- source-register.md

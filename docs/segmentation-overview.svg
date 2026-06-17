@@ -1,0 +1,105 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">PCI DSS segmentation overview</title>
+  <desc id="desc">A simple visual map showing customer checkout flowing into payment systems, with shared identity, CI/CD, logging and backup services affecting PCI DSS scope.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0B2A4A" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2L10 6L2 10" stroke="#1267C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2L10 6L2 10" stroke="#E87500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .title { font: 700 32px Arial, sans-serif; fill: #102A43; }
+      .subtitle { font: 400 18px Arial, sans-serif; fill: #52616B; }
+      .section { font: 700 16px Arial, sans-serif; letter-spacing: 0.08em; fill: #52616B; }
+      .box-title { font: 700 19px Arial, sans-serif; fill: #102A43; }
+      .box-sub { font: 400 14px Arial, sans-serif; fill: #52616B; }
+      .box-title-light { font: 700 19px Arial, sans-serif; fill: #FFFFFF; }
+      .box-sub-light { font: 400 14px Arial, sans-serif; fill: #DCEBFA; }
+      .note-title { font: 700 18px Arial, sans-serif; fill: #102A43; }
+      .note { font: 400 15px Arial, sans-serif; fill: #52616B; }
+      .small { font: 700 13px Arial, sans-serif; fill: #52616B; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="640" rx="32" fill="#FFFFFF"/>
+  <rect x="32" y="32" width="1216" height="576" rx="28" fill="#F7FAFC" stroke="#D8E2EC"/>
+
+  <text x="72" y="88" class="title">PCI DSS Network Segmentation Review</text>
+  <text x="72" y="120" class="subtitle">A visual map of the payment flow, shared services and scope pressure points.</text>
+
+  <rect x="72" y="156" width="294" height="360" rx="22" fill="#FFFFFF" stroke="#D8E2EC" filter="url(#shadow)"/>
+  <text x="96" y="194" class="section">BUSINESS FLOW</text>
+
+  <rect x="104" y="230" width="230" height="76" rx="16" fill="#EAF4FF" stroke="#B6D8F5"/>
+  <circle cx="136" cy="268" r="18" fill="#1267C4" opacity="0.12"/>
+  <path d="M128 268H144M136 260V276" stroke="#1267C4" stroke-width="3" stroke-linecap="round"/>
+  <text x="164" y="262" class="box-title">Customer checkout</text>
+  <text x="164" y="284" class="box-sub">Starts the payment journey</text>
+
+  <line x1="219" y1="316" x2="219" y2="352" stroke="#1267C4" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <rect x="104" y="368" width="230" height="76" rx="16" fill="#EAF4FF" stroke="#B6D8F5"/>
+  <rect x="124" y="389" width="26" height="20" rx="4" stroke="#1267C4" stroke-width="3"/>
+  <path d="M124 415H150" stroke="#1267C4" stroke-width="3" stroke-linecap="round"/>
+  <text x="164" y="400" class="box-title">Web tier</text>
+  <text x="164" y="422" class="box-sub">Connects users to payment</text>
+
+  <line x1="366" y1="406" x2="462" y2="406" stroke="#1267C4" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <rect x="438" y="156" width="404" height="360" rx="22" fill="#FFFFFF" stroke="#D8E2EC" filter="url(#shadow)"/>
+  <text x="462" y="194" class="section">CARDHOLDER DATA ENVIRONMENT</text>
+
+  <rect x="486" y="238" width="308" height="86" rx="18" fill="#1267C4"/>
+  <path d="M518 264H558C565 264 570 269 570 276V286C570 293 565 298 558 298H518C511 298 506 293 506 286V276C506 269 511 264 518 264Z" fill="#FFFFFF" opacity="0.22"/>
+  <path d="M510 277H566" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <text x="592" y="276" class="box-title-light">Payment API</text>
+  <text x="592" y="300" class="box-sub-light">Processes payment activity</text>
+
+  <line x1="640" y1="336" x2="640" y2="376" stroke="#1267C4" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <rect x="486" y="394" width="308" height="86" rx="18" fill="#0B4F94"/>
+  <path d="M520 424H560V456H520V424Z" fill="#FFFFFF" opacity="0.22"/>
+  <path d="M528 424V414C528 404 536 398 546 398C556 398 564 404 564 414V424" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <text x="592" y="432" class="box-title-light">Settlement vault</text>
+  <text x="592" y="456" class="box-sub-light">Stores settlement data</text>
+
+  <rect x="914" y="156" width="294" height="360" rx="22" fill="#FFFFFF" stroke="#D8E2EC" filter="url(#shadow)"/>
+  <text x="938" y="194" class="section">SHARED SERVICES</text>
+
+  <rect x="946" y="226" width="230" height="58" rx="15" fill="#FFF4E6" stroke="#FFD6A6"/>
+  <circle cx="974" cy="255" r="13" stroke="#E87500" stroke-width="3"/>
+  <path d="M964 274C968 266 980 266 984 274" stroke="#E87500" stroke-width="3" stroke-linecap="round"/>
+  <text x="1000" y="251" class="box-title">Shared identity</text>
+  <text x="1000" y="272" class="box-sub">Controls admin access</text>
+
+  <rect x="946" y="306" width="230" height="58" rx="15" fill="#FFF4E6" stroke="#FFD6A6"/>
+  <path d="M964 336H986M975 325V347" stroke="#E87500" stroke-width="3" stroke-linecap="round"/>
+  <text x="1000" y="331" class="box-title">Shared CI/CD</text>
+  <text x="1000" y="352" class="box-sub">Can deploy payment code</text>
+
+  <rect x="946" y="386" width="230" height="58" rx="15" fill="#FFF4E6" stroke="#FFD6A6"/>
+  <path d="M966 402H984V428H966V402ZM991 410H1000V428H991V410Z" fill="#E87500" opacity="0.8"/>
+  <text x="1016" y="411" class="box-title">Central logging</text>
+  <text x="1016" y="432" class="box-sub">May receive card data</text>
+
+  <rect x="946" y="466" width="230" height="58" rx="15" fill="#FFF4E6" stroke="#FFD6A6"/>
+  <path d="M964 486H988V508H964V486ZM970 486V478H982V486" stroke="#E87500" stroke-width="3" stroke-linejoin="round"/>
+  <text x="1000" y="491" class="box-title">Shared backup</text>
+  <text x="1000" y="512" class="box-sub">Can expose stored data</text>
+
+  <path d="M946 255C878 255 858 272 804 276" stroke="#E87500" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrowOrange)"/>
+  <path d="M946 335C878 335 858 290 804 282" stroke="#E87500" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrowOrange)"/>
+  <path d="M794 281C858 386 884 414 946 414" stroke="#E87500" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrowOrange)"/>
+  <path d="M794 437C858 484 884 494 946 494" stroke="#E87500" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrowOrange)"/>
+
+  <rect x="72" y="542" width="1136" height="38" rx="19" fill="#FFFFFF" stroke="#D8E2EC"/>
+  <circle cx="100" cy="561" r="7" fill="#1267C4"/>
+  <text x="116" y="566" class="small">Clear PCI DSS payment systems</text>
+  <circle cx="348" cy="561" r="7" fill="#E87500"/>
+  <text x="364" y="566" class="small">Shared services that can keep systems in scope</text>
+  <text x="818" y="566" class="small">Decision: segmentation claim is not ready until these paths are controlled and tested</text>
+</svg>
