@@ -32,14 +32,14 @@ The goal is to decide whether the company can limit PCI DSS scope to the payment
 
 ```mermaid
 flowchart LR
-    Customer[Customer checkout] --> Web[Web tier]
-    Web --> Pay[Payment API]
-    Pay --> Vault[Settlement vault]
+    Customer["Customer checkout"] --> Web["Web tier"]
+    Web --> Pay["Payment API"]
+    Pay --> Vault["Settlement vault"]
 
-    Identity[Shared identity] --> Pay
-    CICD[Shared CI/CD] --> Pay
-    Logs[Central logging] <-- Pay
-    Backup[Shared backup] <-- Vault
+    Identity["Shared identity"] --> Pay
+    CICD["Shared CI/CD"] --> Pay
+    Logs["Central logging"] <-- Pay
+    Backup["Shared backup"] <-- Vault
 
     style Pay fill:#1267c4,color:#fff
     style Vault fill:#1267c4,color:#fff
